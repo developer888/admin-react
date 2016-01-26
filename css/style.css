@@ -1,0 +1,161 @@
+/* LIBS OVERRIDES */
+.position-relative {
+  position: relative; }
+
+*, *:hover {
+  outline: none !important;
+  text-decoration: none !important; }
+
+.bottom-spacing {
+  margin-bottom: 20px; }
+
+.e-left-spacing {
+  margin-left: 20px; }
+
+/*
+  @include label-variant($label-default-bg);
+}
+
+.label-primary {
+  @include label-variant($label-primary-bg);
+}
+
+.label-success {
+  @include label-variant($label-success-bg);
+}
+
+.label-info {
+  @include label-variant($label-info-bg);
+}
+
+.label-warning {
+  @include label-variant($label-warning-bg);
+}
+
+.label-danger {
+  @include label-variant($label-danger-bg);
+*/
+.label-default a, .label-default a:visited, .label-default a:active, .label-default a:link {
+  color: #c4c4c4 !important; }
+
+.label-default a:hover {
+  color: white !important; }
+
+.label-primary a, .label-primary a:visited, .label-primary a:active, .label-primary a:link {
+  color: #8675c5 !important; }
+
+.label-primary a:hover {
+  color: white !important; }
+
+.label-success a, .label-success a:visited, .label-success a:active, .label-success a:link {
+  color: #c7ead3 !important; }
+
+.label-success a:hover {
+  color: white !important; }
+
+.label-info a, .label-info a:visited, .label-info a:active, .label-info a:link {
+  color: #daf1f8 !important; }
+
+.label-info a:hover {
+  color: white !important; }
+
+.label-warning a, .label-warning a:visited, .label-warning a:active, .label-warning a:link {
+  color: #fceedb !important; }
+
+.label-warning a:hover {
+  color: white !important; }
+
+.label-danger a, .label-danger a:visited, .label-danger a:active, .label-danger a:link {
+  color: #f4cecd !important; }
+
+.label-danger a:hover {
+  color: white !important; }
+
+.e-font-weight-normal {
+  font-weight: normal !important; }
+
+a[href="http://www.amcharts.com/javascript-charts/"] {
+  display: none !important; }
+
+/* LIBS INCLUDE */
+/* OUR FILES INCLUDE */
+#app {
+  padding: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px; }
+
+.roles {
+  width: 400px;
+  position: relative;
+  padding: 0 !important; }
+  .roles .role-dropdown-button {
+    display: block;
+    width: 400px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    height: 38px; }
+    .roles .role-dropdown-button .glyphicon {
+      float: right; }
+  .roles ul {
+    list-style: none;
+    position: absolute;
+    top: 37px;
+    left: 0;
+    display: none;
+    background-color: #fff;
+    width: 400px;
+    z-index: 1;
+    border: 1px solid #eeeeee;
+    border-top: none;
+    padding: 0; }
+    .roles ul li:hover {
+      background-color: #eeeeee; }
+    .roles ul label {
+      font-weight: normal;
+      width: 100%;
+      padding: 0;
+      line-height: 1.8em;
+      margin: 0;
+      cursor: pointer; }
+      .roles ul label input {
+        display: none; }
+      .roles ul label .glyphicon {
+        float: none;
+        margin: 0 10px 0 5px;
+        display: inline-block; }
+      .roles ul label .glyphicon-ok {
+        margin: 0 5px; }
+  .roles ul.active {
+    display: block; }
+
+h1 {
+  font-size: 36px; }
+
+.input-search {
+  float: right;
+  margin: -40px 20px 10px;
+  font-size: 18px;
+  padding: 2px; }
+
+th {
+  background-color: #f8f8f8;
+  font-size: 18px; }
+  th .glyphicon {
+    float: right;
+    font-size: 12px;
+    margin-top: 4px; }
+
+.is-online, .history {
+  text-align: center; }
+
+.btn.glyphicon-th-list {
+  background: transparent;
+  padding: 0;
+  color: #3E3071; }
+
+.btn.glyphicon-th-list:active, .btn.glyphicon-th-list:focus {
+  box-shadow: none;
+  color: #555555; }
+
+/*# sourceMappingURL=style.css.map */

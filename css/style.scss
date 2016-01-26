@@ -1,0 +1,103 @@
+@import "index";
+
+$roles-width: 400px;
+#app {
+  padding: 10px;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+}
+
+.roles {
+  width: $roles-width;
+  position: relative;
+  padding: 0 !important;
+  .role-dropdown-button {
+    display: block;
+    width: $roles-width;
+    border: none;
+    background: transparent;
+    text-align: left;
+    height: 38px;
+    .glyphicon {
+      float: right;
+    }
+
+
+  }
+  ul {
+    list-style: none;
+    position: absolute;
+    top: 37px;
+    left: 0;
+    display: none;
+    background-color: $body-bg;
+    width: $roles-width;
+    z-index: 1;
+    border: 1px solid $gray-lighter;
+    border-top: none;
+    padding: 0;
+    li:hover {
+      background-color: $gray-lighter;
+    }
+    label {
+      font-weight: normal;
+      width: 100%;
+      padding: 0;
+      line-height: 1.8em;
+      margin: 0;
+      cursor: pointer;
+      input {
+        display: none;
+      }
+      .glyphicon {
+        float: none;
+        margin: 0 10px 0 5px;
+        display: inline-block;
+      }
+      .glyphicon-ok{
+        margin: 0 5px;
+      }
+    }
+  }
+  ul.active {
+    display: block;
+  }
+}
+
+h1 {
+  font-size: $font-size-h1;
+}
+
+.input-search {
+  float: right;
+  margin: -40px 20px 10px;
+  font-size: $font-size-large;
+  padding: 2px;
+}
+
+th {
+  background-color: $panel-default-heading-bg;
+  font-size: $font-size-large;
+  .glyphicon {
+    float: right;
+    font-size: $font-size-small;
+    margin-top: 4px;
+  }
+}
+
+.is-online, .history {
+  text-align: center;
+}
+
+.btn.glyphicon-th-list {
+  background: transparent;
+  padding: 0;
+  color: $brand-primary;
+
+}
+
+.btn.glyphicon-th-list:active, .btn.glyphicon-th-list:focus {
+  box-shadow: none;
+  color: $gray;
+}
+

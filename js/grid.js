@@ -10,7 +10,7 @@ var RowInGrig = React.createClass({
                 <td>{item.id}</td>
                 <td>{item.phone}</td>
                 <td className="is-online"><IsOnline online={item.isOnline}/></td>
-                <td className="history"><BtnHistory /></td>
+                <td className="history"><BtnHistory showHistory={this.props.showHistory} /></td>
             </tr>
         )
     }
@@ -61,18 +61,32 @@ var LiRoles = React.createClass({
 });
 var BtnHistory = React.createClass({
     render: function () {
-        return (<button className="btn glyphicon glyphicon-th-list"></button>)
-    }
-});
-var RowInHistory = React.createClass({
-    render: function () {
-        console.log(this);
-        return <tr></tr>;
+        return (<button onClick={this.props.showHistory} className="btn glyphicon glyphicon-th-list"></button>)
     }
 });
 var History = React.createClass({
     getInitialState: function () {
-        return {rows: []}
+        return {rows: [], sorted: false}
+    },
+    sort: function (col) {
+        let direction = 'asc';
+        if (this.state.sorted && this.state.sorted.col == col) {
+            direction = (this.state.sorted.direction == direction) ? "desc" : direction;
+        }
+        let sorted = {col, direction};
+        let rows = this.state.rows;
+        rows.sort(function (a, b) {
+            if (a[sorted.col] == b[sorted.col]) {
+                return 0;
+            }
+            if (a[sorted.col] < b[sorted.col]) {
+                return (sorted.direction == "asc") ? -1: 1;
+            }
+            else {
+                return (sorted.direction == "asc") ? 1: -1;
+            }
+        });
+        this.setState({rows, sorted});
     },
     componentDidMount: function() {
         $.ajax ({
@@ -91,15 +105,21 @@ var History = React.createClass({
                 <table className='table table-bordered table-striped'>
                     <thead>
                     <tr>
-                        <td>timestamp</td>
-                        <td>url</td>
-                        <td>roleFilters</td>
-                        <td>webFilters</td>
-                        <td>roles</td>
+                        <th onClick={this.sort.bind(this, "timestamp")}>timestamp <small className="glyphicon glyphicon-sort "></small></th>
+                        <th onClick={this.sort.bind(this, "url")}>url <small className="glyphicon glyphicon-sort "></small></th>
+                        <th onClick={this.sort.bind(this, "roleFilters")}>roleFilters <small className="glyphicon glyphicon-sort "></small></th>
+                        <th onClick={this.sort.bind(this, "webFilters")}>webFilters <small className="glyphicon glyphicon-sort "></small></th>
+                        <th onClick={this.sort.bind(this, "roles")}>roles <small className="glyphicon glyphicon-sort "></small></th>
                     </tr>
                     </thead>
                     <tbody>
-                        <RowInHistory />
+                    {this.state.rows.map((row, i)=> <tr key={i}>
+                        <td>{row.timestamp}</td>
+                        <td>{row.url}</td>
+                        <td>{row.roleFilters}</td>
+                        <td>{row.webFilters}</td>
+                        <td>{row.roles}</td>
+                    </tr>)}
                     </tbody>
                 </table>
             </div>
@@ -136,7 +156,7 @@ var Search = React.createClass({
 });
 var GridApp = React.createClass({
     getInitialState: function () {
-        return {rows: [], searchText: "", sorted: false}
+        return {rows: [], searchText: "", sorted: false, history: {show: false, userId:null}}
     },
     sort: function (col) {
         let direction = 'asc';
@@ -198,7 +218,7 @@ var GridApp = React.createClass({
                     return;
                 }
             }
-            rows.push(<RowInGrig key={i} data={row} roleChange={this.handleCheckRole}/>);
+            rows.push(<RowInGrig showHistory={() => {this.setState({history: {show: true, userId: row.id}})}} key={i} data={row} roleChange={this.handleCheckRole}/>);
         }.bind(this));
         return (
             <div>
@@ -220,11 +240,12 @@ var GridApp = React.createClass({
                     {rows}
                     </tbody>
                 </table>
+                {this.state.history.show?<History userId={this.state.history.userId} />: null}
             </div>
         )
     }
 });
 ReactDOM.render(
-    <div><History /><GridApp /></div>,
+    <GridApp />,
     document.getElementById('app')
 );

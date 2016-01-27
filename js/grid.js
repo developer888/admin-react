@@ -88,15 +88,8 @@ var History = React.createClass({
         });
         this.setState({rows, sorted});
     },
-    componentDidMount: function() {
-        $.ajax ({
-            url: "temp-api/history.json?userId=" + this.props.userId,
-            method: "POST",
-            dataType: "JSON",
-            success: function(data){
-                this.setState({rows: data.rows})
-            }.bind(this)
-        });
+    componentWillMount: function () {
+        this.setState({rows:this.props.rows});
     },
     render: function () {
         return (
@@ -205,6 +198,17 @@ var GridApp = React.createClass({
             }.bind(this)
         });
     },
+    showHistory: function() {
+        this.setState({history: {show: false}});
+        $.ajax({
+            url: "temp-api/history.json?userId=" + this.props.userId,
+            method: "POST",
+            dataType: "JSON",
+            success: function (data) {
+                this.setState({history: {show: true, rows: data.rows}});
+            }.bind(this)
+        });
+    },
     render: function () {
         var rows = [];
         this.state.rows.forEach(function (row, i) {
@@ -218,7 +222,7 @@ var GridApp = React.createClass({
                     return;
                 }
             }
-            rows.push(<RowInGrig showHistory={() => {this.setState({history: {show: true, userId: row.id}})}} key={i} data={row} roleChange={this.handleCheckRole}/>);
+            rows.push(<RowInGrig showHistory={() => {this.showHistory(row.id)}} key={i} data={row} roleChange={this.handleCheckRole}/>);
         }.bind(this));
         return (
             <div>
@@ -240,7 +244,7 @@ var GridApp = React.createClass({
                     {rows}
                     </tbody>
                 </table>
-                {this.state.history.show?<History userId={this.state.history.userId} />: null}
+                {this.state.history.show?<History rows={this.state.history.rows} />: null}
             </div>
         )
     }
